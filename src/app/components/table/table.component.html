@@ -1,12 +1,57 @@
-<h1>MOCKUP TABLE</h1>
+<h1 class="header">MOCKUP TABLE</h1>
 
-<div class="table">
+<ng-template #repeatItemTemplate let-item="item">
+    <div>{{item.name}}</div>
+</ng-template>
+
+<nui-search class="searchBar" [value]="searchTerm"
+(search)="onSearch($event)"
+#filteringSearch></nui-search>
+<nui-repeat class="repeater" [itemsSource]="state.repeat?.itemsSource || []"
+[repeatItemTemplateRef]="repeatItemTemplate" #filteringRepeat></nui-repeat>
+
+<table nui-table [dataSource]="records" 
+    [sortable]="true" 
+    [sortedColumn]="sortedColumn"
+    (sortOrderChanged)="sortData($event)"> 
+
+    <ng-container nuiColumnDef="name" >
+        <th nui-header-cell *nuiHeaderCellDef i18n> Name</th>
+        <td nui-cell *nuiCellDef="let element" #repeatItemTemplate> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container nuiColumnDef="email">
+        <th nui-header-cell *nuiHeaderCellDef i18n> Email</th>
+        <td nui-cell *nuiCellDef="let element"> {{element.email}}</td>
+    </ng-container>
+
+    <ng-container nuiColumnDef="item">
+        <th nui-header-cell *nuiHeaderCellDef i18n> Item</th>
+        <td nui-cell *nuiCellDef="let element"> {{element.item}}</td>
+    </ng-container>
+
+    <ng-container nuiColumnDef="remove">
+        <th nui-header-cell *nuiHeaderCellDef i18n> 
+            <button nui-button type="button" displayStyle="action" icon="reload" (click)="restoreTable()">RESTORE</button>
+        </th>
+        <td nui-cell *nuiCellDef="let element;"> 
+            <button nui-button type="button" displayStyle="action" (click)="removeRecord(element)">REMOVE</button>
+        </td>
+    </ng-container>
+
+    <tr nui-header-row *nuiHeaderRowDef="displayedColumns;"></tr>
+    <tr nui-row *nuiRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+
+<!-- IGNORE -->
+<div class="table" style="display: none">
     <div class="table-header table-row">
         <p *ngFor="let col of ['name', 'email', 'item', 'date', 'status', 'price']" class="table-column col-{{col}}">{{col | uppercase}}</p>
         <button class="restore-btn" (click)="restoreTable()">RESTORE</button>
     </div>
     <div class="table-content">
-        <div class="table-row" *ngFor="let record of data; let i = index">
+        <div class="table-row" *ngFor="let record of records; let i = index">
             <!-- <p *ngFor="let item of record | keyvalue" class="table-column row-{{item.key}}">{{item.value}}</p> -->
             <p class="col-name table-column">{{record.name}}</p>
             <p class="col-email table-column">{{record.email}}</p>
@@ -14,7 +59,7 @@
             <p class="col-date table-column">{{record.date| date}}</p>
             <p class="col-status table-column {{record.status}}">{{record.status}}</p>
             <p class="col-price table-column">{{record.price.toString()| currency: 'EUR'}}</p>
-            <button class="remove-btn" (click)="removeRecord(i)">REMOVE</button>
+            <!-- <button class="remove-btn" (click)="removeRecord(i)">REMOVE</button> -->
         </div>
     </div>
 </div>

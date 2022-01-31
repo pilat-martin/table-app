@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import (reference) "@nova-ui/bits/sdk/less/nui-framework-variables";
 
 @table-width: 80vw;
 @min-table-width: 800px;
@@ -12,7 +13,7 @@
 @sw-blue: #1C8EB1;
 
 *{
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    // font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     // scrollbar hiding
     &::-webkit-scrollbar{
         display: none;
@@ -26,9 +27,12 @@ body{
 }
 
 h1{
+    color: @nui-color-text-link;
     font-size: 5em;
     display: block;
     text-align: center;
+    font-weight: @nui-font-weight-bold;
+    margin: @nui-space-md;
 }
 
 .table{
