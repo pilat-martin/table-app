@@ -104,10 +104,6 @@ export class TableComponent_ implements OnInit, AfterViewInit, OnDestroy {
     await this.dataSourceService.applyFilters();
   }
 
-  async changePagination(){
-    await this.dataSourceService.applyFilters();
-  }
-
   async applyFilters(){
     await this.dataSourceService.applyFilters();
   }

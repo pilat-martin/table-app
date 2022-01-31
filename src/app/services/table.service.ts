@@ -92,8 +92,8 @@ import { Record } from "../interfaces/record";
       status: Status.OPENED,
       price: "105.90"  
     },]
-    
-    const backup: Array<Record> = [
+
+  const backup: Array<Record> = [
     {
       name: "James Doe",
       email: "james@email.com",
